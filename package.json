@@ -9,7 +9,10 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "prepare": "husky",
-    "lint:format": "npx --no-install lint-staged && npx --no-install pretty-quick --staged"
+    "lint:format": "npx --no-install lint-staged && npx --no-install pretty-quick --staged",
+    "lint:test": "npm run lint:format && npm run test",
+    "az:deploy": "az storage blob upload-batch -s \"./dist/app/browser\" -d \"$web\" --account-name \"stgsandfrontendne007\" --overwrite",
+    "deploy": "npm run lint:format && npm run build && npm run az:deploy"
   },
   "private": true,
   "dependencies": {
