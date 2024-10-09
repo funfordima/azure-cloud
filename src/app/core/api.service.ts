@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { ApiEndpoint } from '../../environments/config.interface';
 import { CONFIG_TOKEN } from './injection-tokens/config.token';
 import { Location } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 /** Base class for services working with APIs */
 @Injectable()
@@ -17,5 +17,14 @@ export abstract class ApiService {
   /** Combines API endpoint and path into a single URL */
   protected getUrl(api: ApiEndpoint, path: string): string {
     return Location.joinWithSlash(this.config.apiEndpoints[api], path);
+  }
+
+  protected getHttpOptions() {
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'text/plain; charset=utf-8',
+        'Ocp-Apim-Subscription-Key': 'df1f48c1816346d59a9460de612b60cb',
+      }),
+    };
   }
 }
